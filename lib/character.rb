@@ -8,7 +8,7 @@ class Character
     @race = 'Human'
     @klass = 'Paladin'
     @max_health = 100
-    @stats = self.inital_stats 
+    @stats = self.roll_stats 
     @inventory = {}
     @weapon = weapon
   end
@@ -51,16 +51,16 @@ class Character
   # Calls on weapon damage which returns a dice roll
   def attack(enemy)
     
-    self_check = _1d20.roll + stat[:modifier]
-    enemy_check = _1d20.roll + enemy.stat[:ac]
+    self_check = Dice.new(20).roll + self.stats[:modifier]
+    enemy_check = Dice.new(20).roll + enemy.stats[:ac]
     
     if self_check > enemy_check
       dmg = @weapon.damage
-        if self_check == 20 + stat[:modifier] # Critical. Total needed for a natural 20
+        if self_check == 20 + self.stats[:modifier] # Critical. Total needed for a natural 20
           dmg *= 2 # Double dmg
           puts "CRITICAL HIT!!"
         end
-      enemy.current_health -= dmg
+      enemy.stats[:hp] -= dmg
       puts "#{self.name} hit #{enemy.name} for #{dmg}!"
     else
       puts "#{self.name} missed!"

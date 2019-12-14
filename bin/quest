@@ -9,5 +9,21 @@
 require './config/environment'
 
 
-die = Dice.new(4)
-puts die.name
+#Initialize Dice First
+_1d4 = Dice.new(4)
+_1d6 = Dice.new(4)
+_2d8 = Dice.new(8,2)
+_1d20 = Dice.new(20)
+
+#Initialize Weapons
+longsword = Weapon.new('Longsword',_2d8)
+fists = Weapon.new('Fists', _1d4)
+#Initialize Characters
+hero = Character.new('guy', longsword)
+baddy = Character.new('Mr. Evil', fists)
+
+health_potion = {name: "Health", dice: _1d4, stat: :hp}
+hp = Item.new(health_potion)
+
+hero.attack(baddy)
+binding.pry
