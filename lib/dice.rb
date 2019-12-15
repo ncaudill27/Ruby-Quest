@@ -2,15 +2,18 @@ class Dice
   
   @@list = []
 
-  attr_accessor :sides, :count, :name
+  attr_accessor :sides, :count
   
   def initialize(sides, count=1) 
     @sides = sides 
     @count = count
-    @name = "#{count}d#{sides}" #ex. '2d4'
     @@list << self
   end
-   
+  
+  def name
+    @name = "#{count}d#{sides}" #ex. '2d4'
+  end
+  
   def self.list #lists all instances of Dice class.
     @@list
   end
