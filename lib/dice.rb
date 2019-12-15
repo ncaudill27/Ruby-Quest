@@ -5,7 +5,6 @@ class Dice
   def initialize(sides, count=1) 
     @sides = sides 
     @count = count
-    @@list << self
   end
   
   def name
@@ -13,8 +12,11 @@ class Dice
   end
 
   def roll
-    total = @count * @sides 
-    rand(1..total)
+    total = 0
+    @count.times do
+      total += rand(1..@sides)
+    end
+    total
   end
 
   def self.stat_roll

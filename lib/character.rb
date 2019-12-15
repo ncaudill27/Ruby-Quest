@@ -1,14 +1,10 @@
 class Character
 
-  attr_accessor :name, :stats, :inventory, :weapon
-  attr_reader :race, :klass
+  attr_accessor :name, :race, :klass, :stats, :inventory, :weapon
+  
 
-  def initialize(name, weapon)
-    @name = name
-    @race = 'Human'
-    @klass = 'Paladin'
-    @max_health = 100
-    @stats = self.roll_stats 
+  def initialize
+    @stats = self.roll_stats
     @inventory = {}
     @weapon = weapon
   end

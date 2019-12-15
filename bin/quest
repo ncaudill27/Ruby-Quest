@@ -9,7 +9,7 @@
 require './config/environment'
 
 
-Initialize Dice First
+# Initialize Dice First
 _1d4 = Dice.new(4)
 _1d6 = Dice.new(4)
 _2d8 = Dice.new(8,2)
@@ -19,8 +19,16 @@ _1d20 = Dice.new(20)
 longsword = Weapon.new('Longsword',_2d8)
 fists = Weapon.new('Fists', _1d4)
 #Initialize Characters
-hero = Character.new('guy', longsword)
-baddy = Character.new('Mr. Evil', fists)
+hero = Character.new
+hero.name = "hero_man"
+hero.klass = self.class.to_s  
+baddy = Character.new
+baddy.name = "baddy_man"
+baddy.klass = self.class.to_s
+pally = Paladin.new
+pally.name = "Pally"
+pally.klass = self.class.to_s
+
 
 health_potion = {name: "Health", dice: _1d4, stat: :hp}
 hp = Item.new(health_potion)

@@ -1,9 +1,11 @@
-class Character_Class 
+class Paladin < Character
 
-  attr_accessor :class_name, :stat_bonus
+  def stat_bonus
+    self.stats[:cha] += 2
+  end
 
-  def initialize(class_name)
-    self.class_name = class_name 
+  def minor_heal(character)
+    character.stats[:hp] += Dice.roll(8)
   end
 
 end
