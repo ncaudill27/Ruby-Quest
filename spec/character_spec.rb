@@ -5,7 +5,8 @@ describe Character do
   goblin.name = "Krush"
   goblin.race = "Goblin" #?Race Module?
   goblin.klass = "Paladin"
-  goblin.weapon = Weapon.new("Sword", Dice.new(10))
+  goblin.weapon = Weapon.new("Sword", Dice.new(1))
+  goblin.stats[:modifier] = 2
 
   describe "Attributes:" do
     #TODO Add class Race and Klass to character.
@@ -21,6 +22,10 @@ describe Character do
       expect(hero.stats.keys).to include(:hp,:str,:dex,:con,:wis,:int,:cha,:modifier,:ac)
     end
 
+    # it "tracks if character is alive" do
+      #TODO Add a dead/dying functionality when :hp at 0      
+    # end
+
     it "has an inventory hash" do 
       expect(goblin.inventory).to be_a(Hash)
     end
@@ -32,7 +37,10 @@ describe Character do
 
   describe "Actions:" do
     badman = Character.new
+    badman.name = "BadMan"
     badman.weapon = Weapon.new("Knife", Dice.new(4))
+    badman.stats[:hp] = 50
+    badman.stats[:modifier] = 1
     badman.add_item("Apple", 1)
 
     describe "#add_item" do
@@ -56,7 +64,7 @@ describe Character do
       
       it "affects the intended stat" do
         goblin.use_item(buff)
-
+        
         expect(goblin.stats[:str]).to eq(11)
       end
       it "subtracts count from inventory" do
@@ -65,13 +73,54 @@ describe Character do
         expect(goblin.inventory[buff]).to eq(8)
       end
       it "cannot use more than inventory count" do
-        goblin.use_item(buff, 11){ expect { print("Krush doesn't have any more 'Buff'")}.to output.to_stdout }
+        expect{goblin.use_item(buff, 11)}.to output("Krush doesn't have any more Buff\n").to_stdout
         expect(goblin.inventory[buff]).to eq(8)
       end
     end
+
+    describe "#attack_check"
+
+      it "returns 'hit' on success" do
+        badman.stats[:ac] = 1
+
+        expect(goblin.attack_check(badman)).to eq('hit')
+      end
+      it "has 'miss' on failure" do
+        badman.stats[:ac] = 30
+
+        expect(goblin.attack_check(badman)).to eq('miss')
+      end
+      it "returns 'critical' on natural 20" do
+
+      end
+    end
+
+    # describe "#attack" do
+    #   badman.stats[:ac] = 1
+
+      
+    #   it "removes damage to other character on hit" do
+    #     goblin.attack(badman)
+
+    #     expect(badman.stats[:hp]).to eq(49)
+    #   end      
+    #   it "responds to hit" do
+    #     expect{goblin.attack(badman)}.to output("Krush hit BadMan for 1!\n").to_stdout
+    #   end
+    #   it "responds to critical" do
+    #     expect{goblin.attack(badman)}.to output("CRITICAL HIT!!\n").to_stdout
+    #   end
+    #   it "responds to miss" do
+    #     badman.stats[:ac] = 30
+
+    #     expect{goblin.attack(badman)}.to output("Krush missed!\n").to_stdout
+    #   end
+    # end
+
+
   
 
 
-  end
+
 
 end

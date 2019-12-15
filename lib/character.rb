@@ -44,23 +44,32 @@ class Character
     end
   end
 
-  # Calls on weapon damage which returns a dice roll
   def attack(enemy)
-    
-    self_check = Dice.new(20).roll + self.stats[:modifier]
-    enemy_check = Dice.new(20).roll + enemy.stats[:ac]
-    
-    if self_check > enemy_check
-      dmg = @weapon.damage
-        if self_check == 20 + self.stats[:modifier] # Critical. Total needed for a natural 20
-          dmg *= 2 # Double dmg
-          puts "CRITICAL HIT!!"
-        end
+    dmg = @weapon.damage
+    case attack_check(enemy)
+
+    when 'hit'
       enemy.stats[:hp] -= dmg
       puts "#{self.name} hit #{enemy.name} for #{dmg}!"
-    else
+    when 'critical'
+      dmg *= 2 # Double dmg
+      puts "CRITICAL!! #{self.name} inflicted #{dmg}!!"
+    when 'miss'
       puts "#{self.name} missed!"
     end
 
+  end
+
+  def attack_check(enemy)
+    self_check = Dice.new(20).roll + self.stats[:modifier]
+    enemy_check = enemy.stats[:ac]
+
+    if self_check > enemy_check
+      return 'hit'
+    elsif self_check == 20 + self.stats[:modifier] # Critical. Total needed for a natural 20
+      return 'critical'
+    else
+      return 'miss'
+    end
   end
 end
