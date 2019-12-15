@@ -11,4 +11,6 @@ class Item
     def use
         @dice.roll
     end
+
+    #TODO Add find_item_by_name
 end

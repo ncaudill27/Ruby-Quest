@@ -4,7 +4,7 @@ class Character
   
 
   def initialize
-    @stats = self.roll_stats
+    @stats = {hp: nil, str: nil, dex: nil, con: nil, wis: nil, int: nil, cha: nil, modifier: nil, ac: nil}
     @inventory = {}
     @weapon = weapon
   end
@@ -36,7 +36,7 @@ class Character
   end
 
   def use_item(item, count = 1)
-    if @inventory[item] == 0
+    if @inventory[item] == 0 || count > @inventory[item]
       puts "#{self.name} doesn't have any more #{item.name}"
     else
       self.stats[item.stat] += item.use
