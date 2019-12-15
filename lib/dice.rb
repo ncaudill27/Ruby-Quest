@@ -1,6 +1,4 @@
 class Dice
-  
-  @@list = []
 
   attr_accessor :sides, :count
   
@@ -12,10 +10,6 @@ class Dice
   
   def name
     @name = "#{count}d#{sides}" #ex. '2d4'
-  end
-  
-  def self.list #lists all instances of Dice class.
-    @@list
   end
 
   def roll
