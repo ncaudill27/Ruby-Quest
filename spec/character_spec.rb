@@ -78,7 +78,7 @@ describe Character do
       end
     end
 
-    describe "#attack_check"
+    describe "#attack_check" do
 
       it "returns 'hit' on success" do
         badman.stats[:ac] = 1
@@ -91,9 +91,10 @@ describe Character do
         expect(goblin.attack_check(badman)).to eq('miss')
       end
       it "returns 'critical' on natural 20" do
-
       end
     end
+    
+  end
 
     # describe "#attack" do
     #   badman.stats[:ac] = 1
