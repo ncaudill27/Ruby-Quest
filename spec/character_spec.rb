@@ -93,30 +93,26 @@ describe Character do
       it "returns 'critical' on natural 20" do
       end
     end
-    
-  end
 
-    # describe "#attack" do
-    #   badman.stats[:ac] = 1
-
+    describe "#attack" do
       
-    #   it "removes damage to other character on hit" do
-    #     goblin.attack(badman)
+      it "responds to hit" do
+        badman.stats[:ac] = 1
 
-    #     expect(badman.stats[:hp]).to eq(49)
-    #   end      
-    #   it "responds to hit" do
-    #     expect{goblin.attack(badman)}.to output("Krush hit BadMan for 1!\n").to_stdout
-    #   end
-    #   it "responds to critical" do
-    #     expect{goblin.attack(badman)}.to output("CRITICAL HIT!!\n").to_stdout
-    #   end
-    #   it "responds to miss" do
-    #     badman.stats[:ac] = 30
+        expect{goblin.attack(badman)}.to output("Krush hit BadMan for 1!\n").to_stdout
+        expect(badman.stats[:hp]).to eq(49)
+      end
+      it "responds to critical" do
+        # let(attack_check(badman)).to
+        expect{goblin.attack(badman)}.to output("CRITICAL!! Krush inflicted 1 damage!!\n").to_stdout
+      end
+      it "responds to miss" do
+        badman.stats[:ac] = 30
 
-    #     expect{goblin.attack(badman)}.to output("Krush missed!\n").to_stdout
-    #   end
-    # end
+        expect{goblin.attack(badman)}.to output("Krush missed!\n").to_stdout
+      end
+    end
+  end
 
 
   

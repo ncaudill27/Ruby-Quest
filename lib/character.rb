@@ -53,7 +53,7 @@ class Character
       puts "#{self.name} hit #{enemy.name} for #{dmg}!"
     when 'critical'
       dmg *= 2 # Double dmg
-      puts "CRITICAL!! #{self.name} inflicted #{dmg}!!"
+      puts "CRITICAL!! #{self.name} inflicted #{dmg} damage!!"
     when 'miss'
       puts "#{self.name} missed!"
     end
