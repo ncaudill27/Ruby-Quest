@@ -1,32 +1,24 @@
-describe CreateCharater do
-  
-  describe "builds character" do
-    
-    it "prompts user to set a name" do
-      
-    end
-    it "prompts to set klass" do
-      
-    end
-    it "prompts to set race" do
-      
-    end
+require_relative 'spec_helper'
 
-    it "rolls for stat" do
+describe CreateCharacter do
+  creator = CreateCharacter.new
+  
+  describe "#stat_roll" do    
+    it "returns a d20 roll" do
+      roll = creator.stat_roll
       
+      expect(roll).to be_between(1,20)
     end
   end
-  describe "#start_stats" do
-    describe "#roll_for_stat" do    
-      it "rolls for one stat" do
-        expect()
-      end
-    end
-    describe "#set_stat" do
-      it "can assign to one stat at a time" do
-      end
-    end
+  describe "#set_stat" do
+    it "can assign to one stat at a time" do
+      creator.set_stat(12)
 
+      expect(creator.character.stats.values).to include(12)
+    end
+  end
+  describe "#set_stats" do
+    
   end
 
 end

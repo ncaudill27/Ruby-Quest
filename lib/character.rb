@@ -6,7 +6,7 @@ class Character
   def initialize
     @stats = {hp: nil, str: nil, dex: nil, con: nil, wis: nil, int: nil, cha: nil, modifier: nil, ac: nil}
     @inventory = {}
-    @weapon = weapon
+    @weapon = nil
   end
 
   def roll_stats

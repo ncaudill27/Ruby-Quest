@@ -2,12 +2,12 @@ class CreateCharacter
  
   attr_accessor :character
   
-  def initializer
+  def initialize
     @character = Character.new
-    self.get_name
-    self.get_race
-    self.get_class
-    self.start_stats
+    # self.set_name
+    # self.set_race
+    # self.set_class
+    # self.set_stats
     #Im still trying to figure out how to
     #create an object from the character class
     #whithin a method from this instance
@@ -17,14 +17,28 @@ class CreateCharacter
     Dice.stat_roll
   end
 
-  def start_stats
+  def set_stat(number)
+    puts "What stat do you want to set for #{number}?"
+    input = gets.strip.downcase.to_sym
+    character.stats[input] = number    
+  end
+
+  def set_stats
     while @character.stats.values.any?(nil)
-      puts "Ready to roll?"
+      puts "Current stats:"
+      print_stats
       roll = stat_roll
-      puts "You rolled #{roll}!"
-      puts "What stat do you want to set for #{roll}?"
-      input = gets.strip.downcase.to_sym
-      @character.stats[input] = roll
+      puts "Your current roll is #{roll}."
+      set_stat(roll)
+
+    end
+  end
+
+  def print_stats
+    character.stats.each do |key, val|
+      unless key == :modifier || key == :ac || key == :hp
+        puts "#{key.to_s.upcase}: #{val}"
+      end
     end
   end
   

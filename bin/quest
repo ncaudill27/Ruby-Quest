@@ -21,15 +21,25 @@ fists = Weapon.new('Fists', _1d4)
 #Initialize Characters
 hero = Character.new
 hero.name = "hero_man"
-hero.klass = self.class.to_s  
+hero.klass = self.class.to_s
+hero.weapon = longsword
+hero.stats[:hp] = 100
+hero.stats[:modifier] = 2
+hero.stats[:ac] = 12
 baddy = Character.new
 baddy.name = "baddy_man"
 baddy.klass = self.class.to_s
+baddy.weapon = longsword
+baddy.stats[:hp] = 100
+baddy.stats[:modifier] = 2
+baddy.stats[:ac] = 12
 pally = Paladin.new
 pally.name = "Pally"
 pally.klass = self.class.to_s
-
-
+pally.weapon = longsword
+pally.stats[:hp] = 100
+pally.stats[:modifier] = 2
+pally.stats[:ac] = 12
 health_potion = {name: "Health", dice: _1d4, stat: :hp}
 hp = Item.new(health_potion)
 
