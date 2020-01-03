@@ -8,6 +8,12 @@ describe CreateCharacter do
       expect(creator.character).to be_an_instance_of(Character)
     end
   end
+
+  describe "#set_name" do
+    it "allows input for name" do
+      #TODO Find how to ensure input is taken from user
+    end
+  end
   
   describe "#stat_roll" do
     it "returns a d20 roll" do

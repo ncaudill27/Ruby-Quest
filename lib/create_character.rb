@@ -13,6 +13,12 @@ class CreateCharacter
     #whithin a method from this instance
   end
 
+  def set_name
+    puts "What would you like to name your character?"
+    input = gets.strip
+    character.name = input
+  end
+
   def stat_roll
     Dice.stat_roll
   end
