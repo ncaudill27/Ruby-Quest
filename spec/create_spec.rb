@@ -2,8 +2,14 @@ require_relative 'spec_helper'
 
 describe CreateCharacter do
   creator = CreateCharacter.new
+
+  describe "#initialize" do
+    it "creates a new instances of Character" do
+      expect(creator.character).to be_an_instance_of(Character)
+    end
+  end
   
-  describe "#stat_roll" do    
+  describe "#stat_roll" do
     it "returns a d20 roll" do
       roll = creator.stat_roll
       

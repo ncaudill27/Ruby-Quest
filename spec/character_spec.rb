@@ -6,7 +6,7 @@ describe Character do
   goblin.race = "Goblin" #?Race Module?
   goblin.klass = "Paladin"
   goblin.weapon = Weapon.new("Sword", Dice.new(1))
-  goblin.stats[:modifier] = 2
+  #TODO Figure how hp, ac, and modifier will be set.
 
   describe "Attributes:" do
     #TODO Add class Race and Klass to character.
@@ -16,14 +16,14 @@ describe Character do
     end
   
 
-    it "has a stats hash" do
+    it "has a hash" do
       hero = Character.new
       expect(hero.stats).to be_a(Hash)
-      expect(hero.stats.keys).to include(:hp,:str,:dex,:con,:wis,:int,:cha,:modifier,:ac)
+      expect(hero.stats.keys).to include(:str,:dex,:con,:wis,:int,:cha)
     end
 
     # it "tracks if character is alive" do
-      #TODO Add a dead/dying functionality when :hp at 0      
+      #TODO Add a dead/dying functionality when.hpat 0      
     # end
 
     it "has an inventory hash" do 
@@ -39,8 +39,7 @@ describe Character do
     badman = Character.new
     badman.name = "BadMan"
     badman.weapon = Weapon.new("Knife", Dice.new(4))
-    badman.stats[:hp] = 50
-    badman.stats[:modifier] = 1
+    badman.hp = 50
     badman.add_item("Apple", 1)
 
     describe "#add_item" do
@@ -81,12 +80,12 @@ describe Character do
     describe "#attack_check" do
 
       it "returns 'hit' on success" do
-        badman.stats[:ac] = 1
+        badman.ac = 1
 
         expect(goblin.attack_check(badman)).to eq('hit')
       end
       it "has 'miss' on failure" do
-        badman.stats[:ac] = 30
+        badman.ac = 30
 
         expect(goblin.attack_check(badman)).to eq('miss')
       end
@@ -97,17 +96,17 @@ describe Character do
     describe "#attack" do
       
       it "responds to hit" do
-        badman.stats[:ac] = 1
+        badman.ac = 1
 
         expect{goblin.attack(badman)}.to output("Krush hit BadMan for 1!\n").to_stdout
-        expect(badman.stats[:hp]).to eq(49)
+        expect(badman.hp).to eq(49)
       end
       it "responds to critical" do
         # let(attack_check(badman)).to
         expect{goblin.attack(badman)}.to output("CRITICAL!! Krush inflicted 1 damage!!\n").to_stdout
       end
       it "responds to miss" do
-        badman.stats[:ac] = 30
+        badman.ac = 30
 
         expect{goblin.attack(badman)}.to output("Krush missed!\n").to_stdout
       end
