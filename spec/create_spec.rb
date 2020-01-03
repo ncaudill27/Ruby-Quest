@@ -24,7 +24,13 @@ describe CreateCharacter do
     end
   end
   describe "#set_stats" do
-    
+    it "rolls and sets core stats" do
+      creator.character.stats = {
+        str:1, spd:1, con:1, wis:1, int:1, cha:1
+       }
+       
+       expect(creator.character.stats.values).not_to be(nil)
+    end
   end
 
 end

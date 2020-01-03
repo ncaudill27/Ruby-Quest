@@ -36,9 +36,7 @@ class CreateCharacter
 
   def print_stats
     character.stats.each do |key, val|
-      unless key == :modifier || key == :ac || key == :hp
-        puts "#{key.to_s.upcase}: #{val}"
-      end
+      puts "#{key.to_s.upcase}: #{val}"
     end
   end
   

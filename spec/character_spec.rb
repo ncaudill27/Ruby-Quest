@@ -113,7 +113,6 @@ describe Character do
     end
   end
 
-
   
 
 
